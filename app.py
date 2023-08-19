@@ -2,10 +2,12 @@ todo_list = []
 
 
 def show_todo():
-    file = open("todos.txt", "r")
-    todo_list = file.readlines()
-    file.close()
-    for index, todo in enumerate(todo_list):
+    with open("todos.txt", "r") as file:
+        todo_list = file.readlines()
+
+    formated_list = [todo.strip("\n") for todo in todo_list]
+
+    for index, todo in enumerate(formated_list):
         print(f"{index + 1} - {todo}")
 
 
@@ -19,29 +21,43 @@ while True:
         case "adicionar":
             todo = input("Digite uma tarefa: ") + "\n"
 
-            file = open("todos.txt", "r")
-            todo_list = file.readlines()
-            file.close()
+            with open("todos.txt", "r") as file:
+                todo_list = file.readlines()
 
             todo_list.append(todo)
 
-            file = open("todos.txt", "w")
-            file.writelines(todo_list)
-            file.close()
+            with open("todos.txt", "w") as file:
+                file.writelines(todo_list)
         case "mostrar":
             show_todo()
         case "editar":
             show_todo()
+
+            with open("todos.txt", "r") as file:
+                todo_list = file.readlines()
+
             index = int(input("Digite o número da tarefa que deseja editar: "))
             if index > len(todo_list):
                 print("Digite um número válido! Voltando ao menu")
             else:
-                todo_list[index - 1] = input("Digite a tarefa: ")
+                todo_list[index - 1] = input("Digite a tarefa: ") + "\n"
+
+                with open("todos.txt", "w") as file:
+                    file.writelines(todo_list)
+
                 print("Tarefa editada")
         case "completar":
             show_todo()
+
+            with open("todos.txt", "r") as file:
+                todo_list = file.readlines()
+
             index = int(input("Digite o número da tarefa que deseja completar: "))
             del todo_list[index - 1]
+
+            with open("todos.txt", "w") as file:
+                file.writelines(todo_list)
+
             print("Parabéns! Tarefa removida com sucesso.")
         case "sair":
             break

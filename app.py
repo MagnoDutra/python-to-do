@@ -23,7 +23,7 @@ while True:
         with open("todos.txt", "r") as file:
             todo_list = file.readlines()
 
-        todo_list.append(todo)
+        todo_list.append(todo + "\n")
 
         with open("todos.txt", "w") as file:
             file.writelines(todo_list)

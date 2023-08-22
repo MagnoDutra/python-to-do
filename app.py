@@ -32,28 +32,37 @@ while True:
     elif "editar" in action:
         with open("todos.txt", "r") as file:
             todo_list = file.readlines()
+        try:
+            index = int(action[7:])
+            if index > len(todo_list):
+                print("Digite um número válido! Voltando ao menu")
+            else:
+                todo_list[index - 1] = input("Digite a tarefa: ") + "\n"
 
-        index = int(action[7:])
-        if index > len(todo_list):
-            print("Digite um número válido! Voltando ao menu")
-        else:
-            todo_list[index - 1] = input("Digite a tarefa: ") + "\n"
+                with open("todos.txt", "w") as file:
+                    file.writelines(todo_list)
+
+                print("Tarefa editada")
+        except ValueError:
+            print("Digite somente o número da tarefa")
+            continue
+    elif "completar" in action:
+        with open("todos.txt", "r") as file:
+            todo_list = file.readlines()
+        try:
+            index = int(action[10:])
+            del todo_list[index - 1]
 
             with open("todos.txt", "w") as file:
                 file.writelines(todo_list)
 
-            print("Tarefa editada")
-    elif "completar" in action:
-        with open("todos.txt", "r") as file:
-            todo_list = file.readlines()
-
-        index = int(action[10:])
-        del todo_list[index - 1]
-
-        with open("todos.txt", "w") as file:
-            file.writelines(todo_list)
-
-        print("Parabéns! Tarefa removida com sucesso.")
+            print("Parabéns! Tarefa removida com sucesso.")
+        except IndexError:
+            print("Você digitou um número que não existe na lista, tente novamente")
+            continue
+        except ValueError:
+            print("É necessário digitar somente o número desejado e nenhuma letra.")
+            continue
     elif "sair" in action:
         break
     else:

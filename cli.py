@@ -1,24 +1,9 @@
-def get_todos():
-    with open("todos.txt", "r") as file:
-        todo_list = file.readlines()
-    return todo_list
+from functions import get_todos, set_todos, show_todo
+import time
 
-
-def set_todos(todos):
-    with open("todos.txt", "w") as file:
-        file.writelines(todos)
-
-
-def show_todo():
-    todo_list = get_todos()
-
-    formated_list = [todo.strip("\n") for todo in todo_list]
-
-    for index, todo in enumerate(formated_list):
-        print(f"{index + 1} - {todo}")
-
-
+now = time.strftime("%b %d, %Y %H:%M:%S")
 print("Bem vindo a sua lista de tarefas.")
+print("Hoje é", now)
 
 while True:
     action = input("\nDigite adicionar, mostrar, editar, completar ou sair: ")

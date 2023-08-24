@@ -8,27 +8,20 @@ def add_todo():
     set_todos(todos)
 
 
-def complete_todo():
-    for i in range(len(todos)):
-        if st.session_state[f"{i}"]:
-            del todos[i]
-            break
-
-    set_todos(todos)
-    # todo = st.session_state["todo"]
-    # index = todos.index(todo)
-    # del todos[index]
-    # set_todos(todos)
-
-
 todos = get_todos()
 
 st.title("App de tarefas")
 st.write("Este app foi feito somente para aprendizado.")
 
 
-for key, todo in enumerate(todos):
-    st.checkbox(todo, key=key, on_change=complete_todo)
+for index, todo in enumerate(todos):
+    checkbox = st.checkbox(todo, key=todo)
+    if checkbox:
+        todos.pop(index)
+        set_todos(todos)
+        del st.session_state[todo]
+        st.experimental_rerun()
+
 
 st.text_input(
     label="",

@@ -6,7 +6,7 @@ O projeto contém 3 modelos, sendo uma lista de tarefas em CLI, GUI utilizando [
 
 ## CLI
 ---
-Para utilizar essa verão, basta ter o python3 instalado e executar o comando `python3 cli.py` no terminal, dentro da pasta do projeto.
+Para utilizar essa versão, basta ter o python3 instalado e executar o comando `python3 cli.py` no terminal, dentro da pasta do projeto.
 
 Os comandos devem ser dados sempre digitando a opção desejada e o parametro a seguir no mesmo comando.
 
